@@ -46,31 +46,63 @@ STEP 6:
   This click handler needs to use 'setCount' to set the 'count' to be the initial number you chose.
 */
 
-import React from 'react'; /* STEP 0 */
+import React, { useState } from 'react'; /* STEP 0 */
 
 export default function Counter() {
-  /* STEP 1 */
+  /* STEP 1 
+  Using the state hook, create a 'count', 'setCount' pair.
+  The 'count' state should be initialized to a number of 
+  your liking (probably zero).
+  */
+
+  const [count, setCount] = useState(0)
 
   const increment = () => {
-    /* STEP 4 */
+    /* STEP 4 
+    This click handler needs to use 'setCount' to schedule the 'count' 
+    to become the current 'count' plus one.
+    These state changes are not synchronous: the updated count arrives on 
+    the next run of the Counter component.
+  
+    */
+   setCount(count + 1)
   };
   const decrement = () => {
-    /* STEP 5 */
+    /* STEP 5 
+    This click handler needs to use 'setCount' to set the 'count' 
+    to be the current 'count' minus one.
+    */
+   setCount(count - 1)
   };
   const reset = () => {
-    /* STEP 6 */
+    /* STEP 6 
+    This click handler needs to use 'setCount' to set the 'count'
+    to be the initial number you chose.
+    */
+    setCount(0)
   };
 
   const style = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: 'royalblue', /* STEP 2 */
+    color: count % 2 === 0  ? 'royalblue' : 'crimson', 
+    
+    /* STEP 2 
+    The 'style' object has the 'color' property 
+    hard-coded to "royalblue".
+    What the value of 'color' should be instead 
+    is a ternary expression that goes like this:
+    If count is even, then "royalblue", 
+    else "crimson".
+    */
   };
+
+  
 
   return (
     <div className='widget-counter container'>
       <h2>Counter</h2>
-      <div style={style}>Number 0 is even</div> {/* STEP 3 */}
+      <div style={style}>Number {count} is {count % 2 === 0 ? 'even': 'odd'}</div> {/* STEP 3 */}
       <div>
         <button onClick={increment}>Increment</button>
         <button onClick={decrement}>Decrement</button>
